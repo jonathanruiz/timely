@@ -28,7 +28,7 @@ export default function Home() {
     return (
         <main className="p-24">
             <h1 className="text-5xl">Timely</h1>
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
                 <div>
                     <Label>Time</Label>
                     <Input type="datetime-local" {...register("time")} />
