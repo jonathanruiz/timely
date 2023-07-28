@@ -1,7 +1,11 @@
 import "./globals.css"
+
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
+
+import { Nav } from "@/components/nav-bar"
 import { ThemeProvider } from "@/components/theme-provider"
+
 import { siteConfig } from "../../config/site"
 
 const inter = Inter({ subsets: ["latin"] })
@@ -24,6 +28,7 @@ export default function RootLayout({
                     defaultTheme="system"
                     enableSystem
                 >
+                    <Nav />
                     {children}
                 </ThemeProvider>
             </body>
