@@ -5,6 +5,7 @@ import { Label } from "@/components/ui/label"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Button } from "@/components/ui/button"
+
 import z from "zod"
 
 const schema = z.object({
@@ -27,8 +28,12 @@ export default function Home() {
 
     return (
         <main className="p-24">
-            <h1 className="text-5xl">Timely</h1>
-            <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
+            <h1 className="text-5xl text-center">Timely</h1>
+            <form
+                onSubmit={handleSubmit(onSubmit)}
+                autoComplete="off"
+                className="m-auto w-1/2"
+            >
                 <div>
                     <Label>Time</Label>
                     <Input type="datetime-local" {...register("time")} />
