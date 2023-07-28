@@ -32,7 +32,7 @@ export default function Home() {
             <form
                 onSubmit={handleSubmit(onSubmit)}
                 autoComplete="off"
-                className="m-auto w-1/2"
+                className="m-auto md:w-1/2 sm:w-2/3"
             >
                 <div>
                     <Label>Time</Label>
