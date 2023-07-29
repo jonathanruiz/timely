@@ -39,7 +39,11 @@ export default function Home() {
                             <FormItem>
                                 <FormLabel>Username</FormLabel>
                                 <FormControl>
-                                    <Input type="datetime-local" {...field} />
+                                    <Input
+                                        type="datetime-local"
+                                        className="w-[300px] max-h-[300px] overflow-y-auto"
+                                        {...field}
+                                    />
                                 </FormControl>
                                 <FormDescription>This is your public display name.</FormDescription>
                                 <FormMessage />
