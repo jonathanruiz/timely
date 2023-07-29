@@ -65,7 +65,7 @@ export default function Home() {
                                         {...field}
                                     />
                                 </FormControl>
-                                <FormDescription>This is your public display name.</FormDescription>
+                                <FormDescription>This is the date and time that will be converted.</FormDescription>
                                 <FormMessage />
                             </FormItem>
                         )}
