@@ -25,7 +25,18 @@ const schema = z.object({
     timezone: z.string().nonempty({ message: "Timezone is required" }),
 })
 
-const localTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone
+const localTimezone = {
+    group: "Local",
+    timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+    label: "Local timezone",
+}
+
+// Get Coordinated Universal Timezone
+const utc = {
+    group: "UTC",
+    timezone: "Coordinated Universal Time",
+    label: "Coordinated Universal Time (UTC)",
+}
 
 export default function Home() {
     const form = useForm({
@@ -90,19 +101,38 @@ export default function Home() {
                                             <CommandEmpty>No timezone found.</CommandEmpty>
                                             <CommandGroup key="default" heading="Default">
                                                 <CommandItem
-                                                    value={localTimezone}
+                                                    value={localTimezone.timezone}
                                                     key="default"
                                                     onSelect={() => {
-                                                        form.setValue("timezone", localTimezone)
+                                                        form.setValue("timezone", localTimezone.timezone)
                                                     }}
                                                 >
                                                     <Check
                                                         className={cn(
                                                             "mr-2 h-4 w-4",
-                                                            localTimezone === field.value ? "opacity-100" : "opacity-0"
+                                                            localTimezone.timezone === field.value
+                                                                ? "opacity-100"
+                                                                : "opacity-0"
                                                         )}
                                                     />
-                                                    <span>{localTimezone}</span>
+                                                    <span>{localTimezone.timezone}</span>
+                                                    <CommandShortcut>{localTimezone.group}</CommandShortcut>
+                                                </CommandItem>
+                                                <CommandItem
+                                                    value={utc.timezone}
+                                                    key="default"
+                                                    onSelect={() => {
+                                                        form.setValue("timezone", utc.timezone)
+                                                    }}
+                                                >
+                                                    <Check
+                                                        className={cn(
+                                                            "mr-2 h-4 w-4",
+                                                            utc.timezone === field.value ? "opacity-100" : "opacity-0"
+                                                        )}
+                                                    />
+                                                    <span>{utc.timezone}</span>
+                                                    <CommandShortcut>{utc.group}</CommandShortcut>
                                                 </CommandItem>
                                             </CommandGroup>
                                             {groups.map((group) => (

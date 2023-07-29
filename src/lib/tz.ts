@@ -1187,7 +1187,7 @@ export const IANA_TIMEZONES = [
         timezone: "Atlantic/St_Helena",
         label: "Atlantic/St_Helena (GMT)",
     },
-    { group: "UTC", timezone: "UTC", label: "UTC (UTC)" },
+    { group: "UTC", timezone: "Coordinated Universal Time", label: "Coordinated Universal Time (UTC)" },
     // UTC-01:00
     {
         group: "UTC-01:00",
@@ -2022,4 +2022,5 @@ export const IANA_TIMEZONES_GROUPS = [
     "Europe",
     "Indian",
     "Pacific",
+    "Coordinated Universal Time",
 ]
