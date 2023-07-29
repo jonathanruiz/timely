@@ -1,10 +1,20 @@
 "use client"
 
 import { zodResolver } from "@hookform/resolvers/zod"
+import { Check, ChevronsUpDown } from "lucide-react"
 import { useForm } from "react-hook-form"
-import z from "zod"
+import * as z from "zod"
 
+import { IANA_TIMEZONES as tzs } from "@/lib/tz"
+import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
+import {
+    Command,
+    CommandEmpty,
+    CommandGroup,
+    CommandInput,
+    CommandItem,
+} from "@/components/ui/command"
 import {
     Form,
     FormControl,
@@ -16,22 +26,15 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import {
-    Select,
-    SelectContent,
-    SelectGroup,
-    SelectItem,
-    SelectLabel,
-    SelectTrigger,
-    SelectValue,
-} from "@/components/ui/select"
+    Popover,
+    PopoverContent,
+    PopoverTrigger,
+} from "@/components/ui/popover"
 
 const schema = z.object({
     time: z.string().nonempty({ message: "Time is required" }),
     timezone: z.string().nonempty({ message: "Timezone is required" }),
 })
-
-// Get all TZ identifiers
-const tzIdentifiers = Intl.supportedValuesOf("timeZone")
 
 export default function Home() {
     const form = useForm({
@@ -72,35 +75,69 @@ export default function Home() {
                         control={form.control}
                         name="timezone"
                         render={({ field }) => (
-                            <FormItem>
+                            <FormItem className="flex flex-col">
                                 <FormLabel>Timezone</FormLabel>
-                                <FormControl>
-                                    <Select
-                                        onValueChange={field.onChange}
-                                        defaultValue={field.value}
-                                    >
-                                        <SelectTrigger className="w-[300px]">
-                                            <SelectValue placeholder="Select a Timezone" />
-                                        </SelectTrigger>
-                                        <SelectContent>
-                                            <SelectGroup className="max-h-[300px] overflow-y-auto">
-                                                {tzIdentifiers.map((tz) => (
-                                                    <SelectItem
-                                                        key={tz}
-                                                        value={tz}
+                                <Popover>
+                                    <PopoverTrigger asChild>
+                                        <FormControl>
+                                            <Button
+                                                variant="outline"
+                                                role="combobox"
+                                                className={cn(
+                                                    "w-[200px] justify-between",
+                                                    !field.value &&
+                                                        "text-muted-foreground"
+                                                )}
+                                            >
+                                                {field.value
+                                                    ? tzs.find(
+                                                          (tz) =>
+                                                              tz.timezone ===
+                                                              field.value
+                                                      )?.timezone
+                                                    : "Select timezone"}
+                                                <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                                            </Button>
+                                        </FormControl>
+                                    </PopoverTrigger>
+                                    <PopoverContent className="w-[300px] max-h-[300px] overflow-y-auto p-0">
+                                        <Command>
+                                            <CommandInput placeholder="Search timezone..." />
+                                            <CommandEmpty>
+                                                No timezone found.
+                                            </CommandEmpty>
+                                            <CommandGroup>
+                                                {tzs.map((tz) => (
+                                                    <CommandItem
+                                                        value={tz.timezone}
+                                                        key={tz.timezone}
+                                                        onSelect={(
+                                                            timezone
+                                                        ) => {
+                                                            form.setValue(
+                                                                "timezone",
+                                                                timezone
+                                                            )
+                                                        }}
                                                     >
-                                                        <SelectLabel>
-                                                            {tz}
-                                                        </SelectLabel>
-                                                    </SelectItem>
+                                                        <Check
+                                                            className={cn(
+                                                                "mr-2 h-4 w-4",
+                                                                tz.timezone ===
+                                                                    field.value
+                                                                    ? "opacity-100"
+                                                                    : "opacity-0"
+                                                            )}
+                                                        />
+                                                        {`${tz.timezone} (${tz.group})`}
+                                                    </CommandItem>
                                                 ))}
-                                            </SelectGroup>
-                                        </SelectContent>
-                                    </Select>
-                                </FormControl>
+                                            </CommandGroup>
+                                        </Command>
+                                    </PopoverContent>
+                                </Popover>
                                 <FormDescription>
-                                    This is the timezone you want to display
-                                    your time in.
+                                    This is the timezone you want to display.
                                 </FormDescription>
                                 <FormMessage />
                             </FormItem>
