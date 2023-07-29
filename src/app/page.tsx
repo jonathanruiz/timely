@@ -1,5 +1,6 @@
 "use client"
 
+import { group } from "console"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Check, ChevronsUpDown } from "lucide-react"
 import { useForm } from "react-hook-form"
@@ -79,6 +80,29 @@ export default function Home() {
                                         <Command>
                                             <CommandInput placeholder="Search timezone..." />
                                             <CommandEmpty>No timezone found.</CommandEmpty>
+                                            <CommandGroup key="default" heading="Default">
+                                                <CommandItem
+                                                    value={Intl.DateTimeFormat().resolvedOptions().timeZone}
+                                                    key="default"
+                                                    onSelect={() => {
+                                                        form.setValue(
+                                                            "timezone",
+                                                            Intl.DateTimeFormat().resolvedOptions().timeZone
+                                                        )
+                                                    }}
+                                                >
+                                                    <Check
+                                                        className={cn(
+                                                            "mr-2 h-4 w-4",
+                                                            Intl.DateTimeFormat().resolvedOptions().timeZone ===
+                                                                field.value
+                                                                ? "opacity-100"
+                                                                : "opacity-0"
+                                                        )}
+                                                    />
+                                                    {Intl.DateTimeFormat().resolvedOptions().timeZone}
+                                                </CommandItem>
+                                            </CommandGroup>
                                             {groups.map((group) => (
                                                 <CommandGroup key={group} heading={group}>
                                                     {timezones.map((tz) =>
