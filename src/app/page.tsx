@@ -57,7 +57,7 @@ export default function Home() {
                         name="time"
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel>Username</FormLabel>
+                                <FormLabel className="mt-4">Username</FormLabel>
                                 <FormControl>
                                     <Input
                                         type="datetime-local"
@@ -76,7 +76,7 @@ export default function Home() {
                         name="timezone"
                         render={({ field }) => (
                             <FormItem className="flex flex-col">
-                                <FormLabel>Timezone</FormLabel>
+                                <FormLabel className="mt-4">Timezone</FormLabel>
                                 <Popover>
                                     <PopoverTrigger asChild>
                                         <FormControl>
