@@ -97,7 +97,7 @@ export default function Home() {
                                     </PopoverTrigger>
                                     <PopoverContent className="w-[300px] max-h-[300px] overflow-y-auto p-0">
                                         <Command>
-                                            <CommandInput placeholder="Search timezone..." />
+                                            <CommandInput placeholder="Type to search (country, city)" />
                                             <CommandEmpty>No timezone found.</CommandEmpty>
                                             <CommandGroup key="default" heading="Default">
                                                 <CommandItem
