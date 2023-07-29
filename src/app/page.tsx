@@ -19,6 +19,8 @@ const schema = z.object({
     timezone: z.string().nonempty({ message: "Timezone is required" }),
 })
 
+const localTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone
+
 export default function Home() {
     const form = useForm({
         resolver: zodResolver(schema),
@@ -82,25 +84,19 @@ export default function Home() {
                                             <CommandEmpty>No timezone found.</CommandEmpty>
                                             <CommandGroup key="default" heading="Default">
                                                 <CommandItem
-                                                    value={Intl.DateTimeFormat().resolvedOptions().timeZone}
+                                                    value={localTimezone}
                                                     key="default"
                                                     onSelect={() => {
-                                                        form.setValue(
-                                                            "timezone",
-                                                            Intl.DateTimeFormat().resolvedOptions().timeZone
-                                                        )
+                                                        form.setValue("timezone", localTimezone)
                                                     }}
                                                 >
                                                     <Check
                                                         className={cn(
                                                             "mr-2 h-4 w-4",
-                                                            Intl.DateTimeFormat().resolvedOptions().timeZone ===
-                                                                field.value
-                                                                ? "opacity-100"
-                                                                : "opacity-0"
+                                                            localTimezone === field.value ? "opacity-100" : "opacity-0"
                                                         )}
                                                     />
-                                                    {Intl.DateTimeFormat().resolvedOptions().timeZone}
+                                                    {localTimezone}
                                                 </CommandItem>
                                             </CommandGroup>
                                             {groups.map((group) => (
