@@ -8,7 +8,14 @@ import * as z from "zod"
 import { IANA_TIMEZONES_GROUPS as groups, IANA_TIMEZONES as timezones } from "@/lib/tz"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
-import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem } from "@/components/ui/command"
+import {
+    Command,
+    CommandEmpty,
+    CommandGroup,
+    CommandInput,
+    CommandItem,
+    CommandShortcut,
+} from "@/components/ui/command"
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
@@ -95,7 +102,7 @@ export default function Home() {
                                                             localTimezone === field.value ? "opacity-100" : "opacity-0"
                                                         )}
                                                     />
-                                                    {localTimezone}
+                                                    <span>{localTimezone}</span>
                                                 </CommandItem>
                                             </CommandGroup>
                                             {groups.map((group) => (
@@ -117,7 +124,8 @@ export default function Home() {
                                                                             : "opacity-0"
                                                                     )}
                                                                 />
-                                                                {tz.timezone}
+                                                                <span>{tz.timezone}</span>
+                                                                <CommandShortcut>{tz.group}</CommandShortcut>
                                                             </CommandItem>
                                                         ) : null
                                                     )}
