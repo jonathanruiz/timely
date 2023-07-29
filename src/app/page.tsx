@@ -5,34 +5,13 @@ import { Check, ChevronsUpDown } from "lucide-react"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
 
-import {
-    IANA_TIMEZONES_GROUPS as groups,
-    IANA_TIMEZONES as tzs,
-} from "@/lib/tz"
+import { IANA_TIMEZONES_GROUPS as groups, IANA_TIMEZONES as tzs } from "@/lib/tz"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
-import {
-    Command,
-    CommandEmpty,
-    CommandGroup,
-    CommandInput,
-    CommandItem,
-} from "@/components/ui/command"
-import {
-    Form,
-    FormControl,
-    FormDescription,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage,
-} from "@/components/ui/form"
+import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem } from "@/components/ui/command"
+import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import {
-    Popover,
-    PopoverContent,
-    PopoverTrigger,
-} from "@/components/ui/popover"
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 
 const schema = z.object({
     time: z.string().nonempty({ message: "Time is required" }),
@@ -52,11 +31,7 @@ export default function Home() {
         <main className="p-24">
             <h1 className="text-5xl text-center">Timely</h1>
             <Form {...form}>
-                <form
-                    onSubmit={form.handleSubmit(onSubmit)}
-                    autoComplete="off"
-                    className="m-auto md:w-1/2 sm:w-2/3"
-                >
+                <form onSubmit={form.handleSubmit(onSubmit)} autoComplete="off" className="m-auto md:w-1/2 sm:w-2/3">
                     <FormField
                         control={form.control}
                         name="time"
@@ -66,9 +41,7 @@ export default function Home() {
                                 <FormControl>
                                     <Input type="datetime-local" {...field} />
                                 </FormControl>
-                                <FormDescription>
-                                    This is your public display name.
-                                </FormDescription>
+                                <FormDescription>This is your public display name.</FormDescription>
                                 <FormMessage />
                             </FormItem>
                         )}
@@ -88,16 +61,11 @@ export default function Home() {
                                                 role="combobox"
                                                 className={cn(
                                                     "w-[300px] justify-between",
-                                                    !field.value &&
-                                                        "text-muted-foreground"
+                                                    !field.value && "text-muted-foreground"
                                                 )}
                                             >
                                                 {field.value
-                                                    ? tzs.find(
-                                                          (tz) =>
-                                                              tz.timezone ===
-                                                              field.value
-                                                      )?.timezone
+                                                    ? tzs.find((tz) => tz.timezone === field.value)?.timezone
                                                     : "Select timezone"}
                                                 <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                                             </Button>
@@ -106,39 +74,22 @@ export default function Home() {
                                     <PopoverContent className="w-[300px] max-h-[300px] overflow-y-auto p-0">
                                         <Command>
                                             <CommandInput placeholder="Search timezone..." />
-                                            <CommandEmpty>
-                                                No timezone found.
-                                            </CommandEmpty>
+                                            <CommandEmpty>No timezone found.</CommandEmpty>
                                             {groups.map((group) => (
-                                                <CommandGroup
-                                                    key={group}
-                                                    heading={group}
-                                                >
+                                                <CommandGroup key={group} heading={group}>
                                                     {tzs.map((tz) =>
-                                                        tz.timezone.split(
-                                                            "/"
-                                                        )[0] === group ? (
+                                                        tz.timezone.split("/")[0] === group ? (
                                                             <CommandItem
-                                                                value={
-                                                                    tz.timezone
-                                                                }
-                                                                key={
-                                                                    tz.timezone
-                                                                }
-                                                                onSelect={(
-                                                                    timezone
-                                                                ) => {
-                                                                    form.setValue(
-                                                                        "timezone",
-                                                                        timezone
-                                                                    )
+                                                                value={tz.timezone}
+                                                                key={tz.timezone}
+                                                                onSelect={(timezone) => {
+                                                                    form.setValue("timezone", timezone)
                                                                 }}
                                                             >
                                                                 <Check
                                                                     className={cn(
                                                                         "mr-2 h-4 w-4",
-                                                                        tz.timezone ===
-                                                                            field.value
+                                                                        tz.timezone === field.value
                                                                             ? "opacity-100"
                                                                             : "opacity-0"
                                                                     )}
@@ -152,9 +103,7 @@ export default function Home() {
                                         </Command>
                                     </PopoverContent>
                                 </Popover>
-                                <FormDescription>
-                                    This is the timezone you want to display.
-                                </FormDescription>
+                                <FormDescription>This is the timezone you want to display.</FormDescription>
                                 <FormMessage />
                             </FormItem>
                         )}
