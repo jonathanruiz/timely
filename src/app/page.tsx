@@ -109,48 +109,46 @@ export default function Home() {
                                             <CommandEmpty>
                                                 No timezone found.
                                             </CommandEmpty>
-                                            <CommandGroup>
-                                                {groups.map((group) => (
-                                                    <CommandGroup
-                                                        key={group}
-                                                        heading={group}
-                                                    >
-                                                        {tzs.map((tz) =>
-                                                            tz.timezone.split(
-                                                                "/"
-                                                            )[0] === group ? (
-                                                                <CommandItem
-                                                                    value={
-                                                                        tz.timezone
-                                                                    }
-                                                                    key={
-                                                                        tz.timezone
-                                                                    }
-                                                                    onSelect={(
+                                            {groups.map((group) => (
+                                                <CommandGroup
+                                                    key={group}
+                                                    heading={group}
+                                                >
+                                                    {tzs.map((tz) =>
+                                                        tz.timezone.split(
+                                                            "/"
+                                                        )[0] === group ? (
+                                                            <CommandItem
+                                                                value={
+                                                                    tz.timezone
+                                                                }
+                                                                key={
+                                                                    tz.timezone
+                                                                }
+                                                                onSelect={(
+                                                                    timezone
+                                                                ) => {
+                                                                    form.setValue(
+                                                                        "timezone",
                                                                         timezone
-                                                                    ) => {
-                                                                        form.setValue(
-                                                                            "timezone",
-                                                                            timezone
-                                                                        )
-                                                                    }}
-                                                                >
-                                                                    <Check
-                                                                        className={cn(
-                                                                            "mr-2 h-4 w-4",
-                                                                            tz.timezone ===
-                                                                                field.value
-                                                                                ? "opacity-100"
-                                                                                : "opacity-0"
-                                                                        )}
-                                                                    />
-                                                                    {`${tz.timezone} (${tz.group})`}
-                                                                </CommandItem>
-                                                            ) : null
-                                                        )}
-                                                    </CommandGroup>
-                                                ))}
-                                            </CommandGroup>
+                                                                    )
+                                                                }}
+                                                            >
+                                                                <Check
+                                                                    className={cn(
+                                                                        "mr-2 h-4 w-4",
+                                                                        tz.timezone ===
+                                                                            field.value
+                                                                            ? "opacity-100"
+                                                                            : "opacity-0"
+                                                                    )}
+                                                                />
+                                                                {tz.timezone}
+                                                            </CommandItem>
+                                                        ) : null
+                                                    )}
+                                                </CommandGroup>
+                                            ))}
                                         </Command>
                                     </PopoverContent>
                                 </Popover>
