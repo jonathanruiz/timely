@@ -2012,3 +2012,14 @@ export const IANA_TIMEZONES = [
         label: "Pacific/Pago Pago (SST)",
     },
 ] as IanaTimezone[]
+
+export const IANA_TIMEZONES_GROUPS = [
+    "Africa",
+    "Australia",
+    "America",
+    "Asia",
+    "Atlantic",
+    "Europe",
+    "Indian",
+    "Pacific",
+]

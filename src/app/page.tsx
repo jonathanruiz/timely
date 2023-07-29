@@ -5,7 +5,10 @@ import { Check, ChevronsUpDown } from "lucide-react"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
 
-import { IANA_TIMEZONES as tzs } from "@/lib/tz"
+import {
+    IANA_TIMEZONES_GROUPS as groups,
+    IANA_TIMEZONES as tzs,
+} from "@/lib/tz"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import {
@@ -107,30 +110,45 @@ export default function Home() {
                                                 No timezone found.
                                             </CommandEmpty>
                                             <CommandGroup>
-                                                {tzs.map((tz) => (
-                                                    <CommandItem
-                                                        value={tz.timezone}
-                                                        key={tz.timezone}
-                                                        onSelect={(
-                                                            timezone
-                                                        ) => {
-                                                            form.setValue(
-                                                                "timezone",
-                                                                timezone
-                                                            )
-                                                        }}
+                                                {groups.map((group) => (
+                                                    <CommandGroup
+                                                        key={group}
+                                                        heading={group}
                                                     >
-                                                        <Check
-                                                            className={cn(
-                                                                "mr-2 h-4 w-4",
-                                                                tz.timezone ===
-                                                                    field.value
-                                                                    ? "opacity-100"
-                                                                    : "opacity-0"
-                                                            )}
-                                                        />
-                                                        {`${tz.timezone} (${tz.group})`}
-                                                    </CommandItem>
+                                                        {tzs.map((tz) =>
+                                                            tz.timezone.split(
+                                                                "/"
+                                                            )[0] === group ? (
+                                                                <CommandItem
+                                                                    value={
+                                                                        tz.timezone
+                                                                    }
+                                                                    key={
+                                                                        tz.timezone
+                                                                    }
+                                                                    onSelect={(
+                                                                        timezone
+                                                                    ) => {
+                                                                        form.setValue(
+                                                                            "timezone",
+                                                                            timezone
+                                                                        )
+                                                                    }}
+                                                                >
+                                                                    <Check
+                                                                        className={cn(
+                                                                            "mr-2 h-4 w-4",
+                                                                            tz.timezone ===
+                                                                                field.value
+                                                                                ? "opacity-100"
+                                                                                : "opacity-0"
+                                                                        )}
+                                                                    />
+                                                                    {`${tz.timezone} (${tz.group})`}
+                                                                </CommandItem>
+                                                            ) : null
+                                                        )}
+                                                    </CommandGroup>
                                                 ))}
                                             </CommandGroup>
                                         </Command>
