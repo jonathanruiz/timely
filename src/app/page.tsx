@@ -82,7 +82,7 @@ export default function Home() {
                                                             <CommandItem
                                                                 value={tz.timezone}
                                                                 key={tz.timezone}
-                                                                onSelect={(timezone) => {
+                                                                onSelect={() => {
                                                                     form.setValue("timezone", tz.timezone)
                                                                 }}
                                                             >
