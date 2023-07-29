@@ -83,7 +83,7 @@ export default function Home() {
                                                                 value={tz.timezone}
                                                                 key={tz.timezone}
                                                                 onSelect={(timezone) => {
-                                                                    form.setValue("timezone", timezone)
+                                                                    form.setValue("timezone", tz.timezone)
                                                                 }}
                                                             >
                                                                 <Check
