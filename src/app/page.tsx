@@ -5,7 +5,7 @@ import { Check, ChevronsUpDown } from "lucide-react"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
 
-import { IANA_TIMEZONES_GROUPS as groups, IANA_TIMEZONES as tzs } from "@/lib/tz"
+import { IANA_TIMEZONES_GROUPS as groups, IANA_TIMEZONES as timezones } from "@/lib/tz"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem } from "@/components/ui/command"
@@ -69,7 +69,7 @@ export default function Home() {
                                                 )}
                                             >
                                                 {field.value
-                                                    ? tzs.find((tz) => tz.timezone === field.value)?.timezone
+                                                    ? timezones.find((tz) => tz.timezone === field.value)?.timezone
                                                     : "Select timezone"}
                                                 <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                                             </Button>
@@ -81,7 +81,7 @@ export default function Home() {
                                             <CommandEmpty>No timezone found.</CommandEmpty>
                                             {groups.map((group) => (
                                                 <CommandGroup key={group} heading={group}>
-                                                    {tzs.map((tz) =>
+                                                    {timezones.map((tz) =>
                                                         tz.timezone.split("/")[0] === group ? (
                                                             <CommandItem
                                                                 value={tz.timezone}
