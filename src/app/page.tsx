@@ -87,7 +87,7 @@ export default function Home() {
                                                 variant="outline"
                                                 role="combobox"
                                                 className={cn(
-                                                    "w-[200px] justify-between",
+                                                    "w-[300px] justify-between",
                                                     !field.value &&
                                                         "text-muted-foreground"
                                                 )}
@@ -164,6 +164,7 @@ export default function Home() {
                     <Button type="submit" className="p-5 my-5 bg-blue-500">
                         Submit
                     </Button>
+                    <div>{JSON.stringify(form.watch(), null, 2)}</div>
                 </form>
             </Form>
         </main>
