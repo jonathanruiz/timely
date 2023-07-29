@@ -57,7 +57,7 @@ export default function Home() {
                         name="time"
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel className="mt-4">Username</FormLabel>
+                                <FormLabel className="mt-4">Date and Time</FormLabel>
                                 <FormControl>
                                     <Input
                                         type="datetime-local"
