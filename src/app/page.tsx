@@ -172,7 +172,6 @@ export default function Home() {
                     <Button type="submit" className="p-5 my-5 bg-blue-500">
                         Submit
                     </Button>
-                    <div>{JSON.stringify(form.watch(), null, 2)}</div>
                 </form>
             </Form>
         </main>
